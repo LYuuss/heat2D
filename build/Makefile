@@ -153,6 +153,30 @@ src/Grid.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/heat2d.dir/build.make CMakeFiles/heat2d.dir/src/Grid.cpp.s
 .PHONY : src/Grid.cpp.s
 
+src/HeatSolver.o: src/HeatSolver.cpp.o
+.PHONY : src/HeatSolver.o
+
+# target to build an object file
+src/HeatSolver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/heat2d.dir/build.make CMakeFiles/heat2d.dir/src/HeatSolver.cpp.o
+.PHONY : src/HeatSolver.cpp.o
+
+src/HeatSolver.i: src/HeatSolver.cpp.i
+.PHONY : src/HeatSolver.i
+
+# target to preprocess a source file
+src/HeatSolver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/heat2d.dir/build.make CMakeFiles/heat2d.dir/src/HeatSolver.cpp.i
+.PHONY : src/HeatSolver.cpp.i
+
+src/HeatSolver.s: src/HeatSolver.cpp.s
+.PHONY : src/HeatSolver.s
+
+# target to generate assembly for a file
+src/HeatSolver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/heat2d.dir/build.make CMakeFiles/heat2d.dir/src/HeatSolver.cpp.s
+.PHONY : src/HeatSolver.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -189,6 +213,9 @@ help:
 	@echo "... src/Grid.o"
 	@echo "... src/Grid.i"
 	@echo "... src/Grid.s"
+	@echo "... src/HeatSolver.o"
+	@echo "... src/HeatSolver.i"
+	@echo "... src/HeatSolver.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

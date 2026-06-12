@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/lyesdjemaa/Documents/lyes/heat2d/src/Grid.cpp" "CMakeFiles/heat2d.dir/src/Grid.cpp.o" "gcc" "CMakeFiles/heat2d.dir/src/Grid.cpp.o.d"
+  "/Users/lyesdjemaa/Documents/lyes/heat2d/src/HeatSolver.cpp" "CMakeFiles/heat2d.dir/src/HeatSolver.cpp.o" "gcc" "CMakeFiles/heat2d.dir/src/HeatSolver.cpp.o.d"
   "/Users/lyesdjemaa/Documents/lyes/heat2d/src/main.cpp" "CMakeFiles/heat2d.dir/src/main.cpp.o" "gcc" "CMakeFiles/heat2d.dir/src/main.cpp.o.d"
   )
 

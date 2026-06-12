@@ -11,4 +11,5 @@ include_directories(include)
 add_executable(heat2d
     src/main.cpp
     src/Grid.cpp
+    src/HeatSolver.cpp
 )
