@@ -10,12 +10,11 @@ EXECUTABLE = BUILD_DIR / "heat2d"
 RESULTS_FILE = ROOT_DIR / "benchmark_results.csv"
 
 
-BENCHMARKS = [
-    (500, 500, 500),
-    (1000, 1000, 500),
-    (1500, 1500, 500),
-    (2000, 2000, 500),
-]
+GRID_ROWS = 1500
+GRID_COLS = 1500
+ITERATIONS = 500
+
+THREAD_COUNTS = [1, 2, 4, 8]
 
 
 def extract_execution_time(output: str) -> float:
@@ -27,12 +26,13 @@ def extract_execution_time(output: str) -> float:
     return float(match.group(1))
 
 
-def run_benchmark(rows: int, cols: int, iterations: int) -> float:
+def run_benchmark(rows: int, cols: int, iterations: int, threads: int) -> float:
     command = [
         str(EXECUTABLE),
         str(rows),
         str(cols),
         str(iterations),
+        str(threads),
     ]
 
     completed_process = subprocess.run(
@@ -55,19 +55,37 @@ def main() -> None:
 
     results = []
 
-    for rows, cols, iterations in BENCHMARKS:
-        print(f"Running benchmark: {rows}x{cols}, iterations={iterations}")
+    sequential_time = None
 
-        elapsed = run_benchmark(rows, cols, iterations)
+    for threads in THREAD_COUNTS:
+        print(
+            f"Running benchmark: "
+            f"{GRID_ROWS}x{GRID_COLS}, "
+            f"iterations={ITERATIONS}, "
+            f"threads={threads}"
+        )
+
+        elapsed = run_benchmark(GRID_ROWS, GRID_COLS, ITERATIONS, threads)
+
+        if threads == 1:
+            sequential_time = elapsed
+
+        speedup = sequential_time / elapsed if sequential_time else 1.0
+        efficiency = speedup / threads
 
         results.append({
-            "rows": rows,
-            "cols": cols,
-            "iterations": iterations,
+            "rows": GRID_ROWS,
+            "cols": GRID_COLS,
+            "iterations": ITERATIONS,
+            "threads": threads,
             "execution_time_seconds": elapsed,
+            "speedup": speedup,
+            "efficiency": efficiency,
         })
 
-        print(f"  -> {elapsed:.6f} seconds")
+        print(f"  -> time: {elapsed:.6f}s")
+        print(f"  -> speedup: {speedup:.3f}")
+        print(f"  -> efficiency: {efficiency:.3f}")
 
     with RESULTS_FILE.open("w", newline="") as file:
         writer = csv.DictWriter(
@@ -76,7 +94,10 @@ def main() -> None:
                 "rows",
                 "cols",
                 "iterations",
+                "threads",
                 "execution_time_seconds",
+                "speedup",
+                "efficiency",
             ],
         )
 
